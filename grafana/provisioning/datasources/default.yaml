@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: LokiDataSource
+    type: loki
+    access: proxy
+    url: "http://172.23.123.237/loki/"
+    editable: false
+    uid: c7ba5c05-630d-4226-920d-125d80c1702d
