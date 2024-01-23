@@ -1,0 +1,521 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "description": "Monitor processed logs",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic-by-name"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 15,
+                "w": 16,
+                "x": 0,
+                "y": 0
+            },
+            "id": 5,
+            "options": {
+                "displayLabels": [
+                    "value"
+                ],
+                "legend": {
+                    "displayMode": "list",
+                    "placement": "right",
+                    "showLegend": true,
+                    "values": [
+                        "percent"
+                    ]
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^Value \\#A$/",
+                    "values": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "10.1.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum by(error) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Total Errors by Error Type",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value #A": false
+                        },
+                        "indexByName": {},
+                        "renameByName": {
+                            "Time": "",
+                            "Value #A": "",
+                            "cb_version": "Version",
+                            "error": "Error"
+                        }
+                    }
+                }
+            ],
+            "type": "piechart"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 8,
+                "x": 16,
+                "y": 0
+            },
+            "id": 4,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "10.1.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum by(error) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Total Errors by Error Type",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {
+                            "Time": "",
+                            "Value #A": "Occurrence",
+                            "cb_version": "Version",
+                            "error": "Error Title"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 8,
+                "x": 16,
+                "y": 5
+            },
+            "id": 1,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "10.1.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                    },
+                    "editorMode": "builder",
+                    "expr": "sum by(cb_version) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Total Errors by Server Version",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {
+                            "Time": "",
+                            "Value #A": "Apperance",
+                            "cb_version": "Version"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "noValue": "Unknown",
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 8,
+                "x": 16,
+                "y": 10
+            },
+            "id": 3,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "10.1.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum by(capella) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Total Errors (On Prem / Capella)",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {
+                            "Time": "",
+                            "Value #A": "Apperance",
+                            "cb_version": "Version"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+            },
+            "gridPos": {
+                "h": 17,
+                "w": 24,
+                "x": 0,
+                "y": 15
+            },
+            "id": 2,
+            "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                    },
+                    "editorMode": "code",
+                    "expr": "{cb_version=\"$version\"} |= `$filter`",
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "Plain Server Errors",
+            "type": "logs"
+        }
+    ],
+    "refresh": "30m",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "selected": false,
+                    "text": "7.2.2",
+                    "value": "7.2.2"
+                },
+                "datasource": {
+                    "type": "loki",
+                    "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                },
+                "definition": "",
+                "hide": 0,
+                "includeAll": false,
+                "label": "Server Version",
+                "multi": false,
+                "name": "version",
+                "options": [],
+                "query": {
+                    "label": "cb_version",
+                    "refId": "LokiVariableQueryEditor-VariableQuery",
+                    "stream": "",
+                    "type": 1
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "current": {},
+                "hide": 0,
+                "label": "Filter",
+                "name": "filter",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": "",
+                        "value": ""
+                    }
+                ],
+                "query": "",
+                "skipUrlSync": false,
+                "type": "textbox"
+            },
+            {
+                "datasource": {
+                    "type": "loki",
+                    "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
+                },
+                "filters": [],
+                "hide": 0,
+                "name": "Filters",
+                "skipUrlSync": false,
+                "type": "adhoc"
+            },
+            {
+                "current": {
+                    "selected": false,
+                    "text": "True",
+                    "value": "True"
+                },
+                "hide": 0,
+                "includeAll": false,
+                "label": "Is Capella",
+                "multi": false,
+                "name": "is_capella",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": "True",
+                        "value": "True"
+                    },
+                    {
+                        "selected": false,
+                        "text": "False",
+                        "value": "False"
+                    }
+                ],
+                "query": "True, False",
+                "queryValue": "",
+                "skipUrlSync": false,
+                "type": "custom"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-1y",
+        "to": "now"
+    },
+    "timepicker": {
+        "hidden": false,
+        "refresh_intervals": [
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+        ]
+    },
+    "timezone": "",
+    "title": "Logs Monitor",
+    "uid": "b7bd1913-3f86-4625-8980-54d3e12c15e6",
+    "version": 14,
+    "weekStart": ""
+}
