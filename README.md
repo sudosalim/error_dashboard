@@ -2,7 +2,7 @@
 Simple dashboard and log collector for processed server logs.
 
 ## Components:
-- Loki: https://grafana.com/docs/loki/latest/get-started/overview/
+- [Grafana Loki](https://grafana.com/docs/loki/latest/get-started/overview/)
 - Grafana
 
 
@@ -10,7 +10,7 @@ Simple dashboard and log collector for processed server logs.
 - Start Loki docker container using command in `loki/install.sh`
 - Start Grafana dashboard from `./grafana` directory using docker compose:
 ```
-docker compose up -d
+docker compose up -d --build
 ```
 
 ### Useful APIs
@@ -30,11 +30,10 @@ POST http://localhost:3100/loki/api/v1/push
 
 3. Grafana dashboard
 ```
-# Grafana http://localhost:3000/?orgId=1
-# brew services start grafana 
+GET http://localhost:3000
 ```
 
-
+[Loki API Reference](https://grafana.com/docs/loki/latest/reference/api/)
 ### TODO:
 - Automate deployment using one command, maybe using make
 - Improve the dashboard

@@ -84,7 +84,7 @@
                         "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                     },
                     "editorMode": "code",
-                    "expr": "sum by(error) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "expr": "sum by(error) (count_over_time({level=\"$level\"} |= `$search` [$__range]))",
                     "queryType": "instant",
                     "refId": "A"
                 }
@@ -171,7 +171,7 @@
                         "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                     },
                     "editorMode": "code",
-                    "expr": "sum by(error) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "expr": "sum by(error) (count_over_time({level=\"$level\"} |= `$search` [$__range]))",
                     "queryType": "instant",
                     "refId": "A"
                 }
@@ -256,8 +256,8 @@
                         "type": "loki",
                         "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                     },
-                    "editorMode": "builder",
-                    "expr": "sum by(cb_version) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "editorMode": "code",
+                    "expr": "sum by(cb_version) (count_over_time({level=\"$level\"} |= `$search` [$__range]))",
                     "queryType": "instant",
                     "refId": "A"
                 }
@@ -343,7 +343,7 @@
                         "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                     },
                     "editorMode": "code",
-                    "expr": "sum by(capella) (count_over_time({cb_version=\"$version\"} |= `$filter` [$__range]))",
+                    "expr": "sum by(capella) (count_over_time({level=\"$level\"} |= `$search` [$__range]))",
                     "queryType": "instant",
                     "refId": "A"
                 }
@@ -395,8 +395,8 @@
                         "type": "loki",
                         "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                     },
-                    "editorMode": "code",
-                    "expr": "{cb_version=\"$version\"} |= `$filter`",
+                    "editorMode": "builder",
+                    "expr": "{level=\"$level\"} |= `$search`",
                     "queryType": "range",
                     "refId": "A"
                 }
@@ -405,7 +405,7 @@
             "type": "logs"
         }
     ],
-    "refresh": "30m",
+    "refresh": "",
     "schemaVersion": 38,
     "style": "dark",
     "tags": [],
@@ -413,23 +413,24 @@
         "list": [
             {
                 "current": {
-                    "selected": false,
-                    "text": "7.2.2",
-                    "value": "7.2.2"
+                    "selected": true,
+                    "text": "error",
+                    "value": "error"
                 },
                 "datasource": {
                     "type": "loki",
                     "uid": "c7ba5c05-630d-4226-920d-125d80c1702d"
                 },
                 "definition": "",
+                "description": "For now, this is just to identify the stream",
                 "hide": 0,
-                "includeAll": false,
-                "label": "Server Version",
+                "includeAll": true,
+                "label": "Type",
                 "multi": false,
-                "name": "version",
+                "name": "level",
                 "options": [],
                 "query": {
-                    "label": "cb_version",
+                    "label": "level",
                     "refId": "LokiVariableQueryEditor-VariableQuery",
                     "stream": "",
                     "type": 1
@@ -442,9 +443,10 @@
             },
             {
                 "current": {},
+                "description": "Search using plain text",
                 "hide": 0,
-                "label": "Filter",
-                "name": "filter",
+                "label": "Search",
+                "name": "search",
                 "options": [
                     {
                         "selected": true,
@@ -466,34 +468,6 @@
                 "name": "Filters",
                 "skipUrlSync": false,
                 "type": "adhoc"
-            },
-            {
-                "current": {
-                    "selected": false,
-                    "text": "True",
-                    "value": "True"
-                },
-                "hide": 0,
-                "includeAll": false,
-                "label": "Is Capella",
-                "multi": false,
-                "name": "is_capella",
-                "options": [
-                    {
-                        "selected": true,
-                        "text": "True",
-                        "value": "True"
-                    },
-                    {
-                        "selected": false,
-                        "text": "False",
-                        "value": "False"
-                    }
-                ],
-                "query": "True, False",
-                "queryValue": "",
-                "skipUrlSync": false,
-                "type": "custom"
             }
         ]
     },
@@ -511,6 +485,6 @@
     "timezone": "",
     "title": "Logs Monitor",
     "uid": "b7bd1913-3f86-4625-8980-54d3e12c15e6",
-    "version": 14,
+    "version": 15,
     "weekStart": ""
 }
